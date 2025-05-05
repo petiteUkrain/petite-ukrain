@@ -1,0 +1,13 @@
+# Node and Python artifacts
+node_modules/
+.env
+__pycache__/
+*.pyc
+*.log
+*.sqlite
+*.dump
+
+# IDE and system files
+.DS_Store
+.vscode/
+.idea/

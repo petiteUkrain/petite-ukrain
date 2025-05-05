@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Продам велосипед",
+    "description": "Гарний стан, майже новий. 2023 року.",
+    "price": "250",
+    "image": "images/bike.jfif",
+    "location": "Монреаль",
+    "date": "2025-04-15"
+  },
+  {
+    "title": "Квартира в оренду",
+    "description": "1 спальня, метро Jean-Talon. Без посередників.",
+    "price": "1200",
+    "image": "images/flat.jpg",
+    "location": "Монреаль, Jean-Talon",
+    "date": "2025-04-05"
+  },
+    {
+    "title": "Квартира в оренду",
+    "description": "2 спальні, світла та простора. Без тварин.",
+    "price": "1800",
+    "image": "images/flat2.jpg",
+    "location": "Оттава",
+    "date": "2025-03-29"
+  }
+]
