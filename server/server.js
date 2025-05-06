@@ -6,8 +6,8 @@ const app = express();
 const prisma = new PrismaClient();
 const PORT = 3000;
 
-// Видача frontend-файлів з корневої папки проекту(має бути HTML і JS)
-app.use(express.static(path.join(__dirname, "..")));
+// фронтенд
+app.use(express.static(path.join(__dirname, "../public")));
 
 // Віддаємо index.html вручну при запиті на "/"
 app.get("/", (req, res) => {
