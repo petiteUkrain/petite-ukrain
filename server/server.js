@@ -1,36 +1,30 @@
+require('dotenv').config(); // loading environment variables from .env
+
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
 const path = require("path");
 
 const app = express();
+app.use(express.json()); // middleware to parse JSON from request bodies
 const prisma = new PrismaClient();
 const PORT = 3000;
 
-// фронтенд
+const adsRoutes = require("./routes/ads");
+
+// Serve static frontend files from the public directory
 app.use(express.static(path.join(__dirname, "../public")));
 
-// Віддаємо index.html вручну при запиті на "/"
+// Use ads API routes under the /api path
+app.use("/api", adsRoutes);
+
+// Serve index.html manually for the root URL
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "index.html"));
 });
 
-// show images from images folder
+// Serve images from the /images folder
 app.use("/images", express.static(path.join(__dirname, "..", "images")));
 
-
-// API для отримання оголошень
-app.get("/api/ads", async (req, res) => {
-  try {
-    const ads = await prisma.ads.findMany({
-      orderBy: { created_at: "desc" },
-    });
-    res.json(ads);
-  } catch (error) {
-    console.error("❌ Помилка при отриманні оголошень:", error);
-    res.status(500).json({ error: "Не вдалося отримати оголошення" });
-  }
-});
-
 app.listen(PORT, () => {
-  console.log(`✅ Сервер запущено на http://localhost:${PORT}`);
+  console.log(`Server is running at http://localhost:${PORT}`);
 });
