@@ -43,6 +43,15 @@ bot.on('message', async (msg) => {
   const chatId = msg.chat.id;
   const user = userStates[chatId];
 
+//access control
+  const allowedUsers = process.env.TELEGRAM_ALLOWED_USERS || ''
+	.split(',')
+	.map(id => Number(id.trim()))
+	.filter(id => !isNaN(id));
+  if (!allowedUsers.includes(msg.from.id)) {
+	return bot.sendMessage(chatId, 'Access forbidden');
+  }
+
   if (!user || msg.text.startsWith('/')) return;
 
   if (user.step === 'title') {
