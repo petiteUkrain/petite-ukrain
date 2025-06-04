@@ -21,6 +21,24 @@
    </select>
   </div>
 
+ <div class="center-block">
+  <h2>Створити оголошення</h2>
+  <form id="adForm">
+    <input type="text" name="title" placeholder="Заголовок" required><br>
+    <textarea name="description" placeholder="Опис" required></textarea><br>
+    <input type="number" name="price" placeholder="Ціна" required><br>
+    <input type="text" name="image_url" placeholder="URL зображення"><br>
+	<select name="city" required>
+      <option value="">Оберіть місто</option>
+      <option value="Монреаль">Монреаль</option>
+      <option value="Квебек">Квебек</option>
+      <option value="Торонто">Торонто</option>
+    </select><br>
+    <button type="submit">Додати оголошення</button>
+  </form>
+ </div>
+
+
   <div id="ads"></div>
 
   <script src="app.js"></script>

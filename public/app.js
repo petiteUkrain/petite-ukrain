@@ -39,4 +39,32 @@ fetch("/api/ads")
     locationSelect.addEventListener("change", applyFilters);
 
     render(ads);
+
+    // ✔️ Обробка форми ДОДАННЯ оголошення (було правильно, але дужка була зайва)
+    const adForm = document.getElementById("adForm");
+    adForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const formData = new FormData(adForm);
+      const ad = Object.fromEntries(formData.entries());
+
+      const res = await fetch("/api/create-ad", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(ad)
+      });
+
+      const result = await res.json();
+      if (res.ok) {
+        alert("Оголошення додано!");
+        adForm.reset();
+
+        // Оновлюємо список (перезапитуємо оголошення)
+        const updatedRes = await fetch("/api/ads");
+        const updatedAds = await updatedRes.json();
+        ads.length = 0; ads.push(...updatedAds);
+        render(updatedAds);
+      } else {
+        alert("Помилка: " + result.error);
+      }
+    });
   });
