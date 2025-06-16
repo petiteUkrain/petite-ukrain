@@ -1,0 +1,15 @@
+node_modules/
+server/.env
+*.log
+/server/generated/
+
+# Optional Python-related (in case Python scripts will be used)
+__pycache__/
+*.pyc
+*.sqlite
+*.dump
+
+# IDE and system files
+.DS_Store
+.vscode/
+.idea/

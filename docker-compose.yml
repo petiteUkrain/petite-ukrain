@@ -1,0 +1,43 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+      target: final
+    command: node server.js
+    ports:
+      - "3000:3000"
+    working_dir: /app
+    env_file:
+      - ./server/.env
+    environment:
+      - USE_DB=false   # OVERRIDE .env to force RAM mode in Docker
+    depends_on:
+      - db
+
+  telegrambot:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+      target: final
+    command: node bot.js
+    working_dir: /app
+    env_file:
+      - ./server/.env
+    environment:
+      - USE_DB=false    # for  future - override .env to force RAM mode in Docker
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: petiteukrain
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
