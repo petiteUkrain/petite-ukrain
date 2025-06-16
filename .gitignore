@@ -1,5 +1,7 @@
 # Node and Python artifacts
 node_modules/
+server/.env
+pgdata/
 .env
 __pycache__/
 *.pyc
